@@ -13,3 +13,4 @@ Turbolinks.start()
 ActiveStorage.start()
 
 require('packs/main')
+require('active_scaffold')
