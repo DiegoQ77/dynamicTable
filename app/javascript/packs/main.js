@@ -18,22 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // console.log(countProducts)
   // console.log(total)
 
-  barCodeInput.addEventListener('keyup', function (e) {
-    if (e.keyCode === 13) {
-      e.preventDefault()
-      const row = document.createElement('tr')
-      row.innerHTML = agregarFila()
-      // console.log(document.getElementById('row-table').value)
-      // console.log(e)
-      // nameProduct.innerHTML = 'nuevo'
-      // countProducts.innerHTML = 5
-      // total.innerHTML = 5.50
+  // barCodeInput.addEventListener('keyup', function (e) {
+  //   if (e.keyCode === 13) {
+  //     e.preventDefault()
+  //     const row = document.createElement('tr')
+  //     row.innerHTML = agregarFila()
+  //     // console.log(document.getElementById('row-table').value)
+  //     // console.log(e)
+  //     // nameProduct.innerHTML = 'nuevo'
+  //     // countProducts.innerHTML = 5
+  //     // total.innerHTML = 5.50
 
-      // $('table').find('tbody').prepend(agregarFila(e))
+  //     // $('table').find('tbody').prepend(agregarFila(e))
 
-      bodyTable.insertBefore(row, barcodeROw)
-    }
-  })
+  //     bodyTable.insertBefore(row, barcodeROw)
+  //   }
+  // })
 })
 
 // Funciones
@@ -56,6 +56,19 @@ function agregarFila () {
   `)
 }
 
-function getValues () {
+// Jquery
 
-}
+$('.table tbody tr input').keyup(function (e) {
+  const url = '/add_items'
+  if (e.keyCode === 13) {
+    $.ajax({
+      url: url,
+      success: function (data) {
+        console.log('Success')
+      },
+      error: function () {
+        console.log('error')
+      }
+    })
+  }
+})

@@ -4,6 +4,11 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @products = Product.all
+
+    respond_to do |format|
+      format.js {render layout: false}
+      format.html { render 'index'}
+    end
   end
 
   # GET /products/1 or /products/1.json
@@ -53,6 +58,12 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to products_url, notice: "Product was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def add_item
+    respond_to do |format|
+      render js: "alert('The username to be displayed is: #"
     end
   end
 
