@@ -63,8 +63,10 @@ $('.table tbody tr input').keyup(function (e) {
   if (e.keyCode === 13) {
     $.ajax({
       url: url,
-      success: function (data) {
+      data: { product: { name: 'Diego', description: 'whatever' } },
+      success: function (e) {
         console.log('Success')
+        console.log(e)
       },
       error: function () {
         console.log('error')

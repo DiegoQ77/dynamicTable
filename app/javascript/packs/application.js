@@ -11,6 +11,6 @@ import 'bootstrap'
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
+global.$ = jQuery
 require('packs/main')
 // require('active_scaffold')
