@@ -18,27 +18,51 @@ document.addEventListener('DOMContentLoaded', () => {
   // console.log(countProducts)
   // console.log(total)
 
-  // barCodeInput.addEventListener('keyup', function (e) {
-  //   if (e.keyCode === 13) {
-  //     e.preventDefault()
-  //     const row = document.createElement('tr')
-  //     row.innerHTML = agregarFila()
-  //     // console.log(document.getElementById('row-table').value)
-  //     // console.log(e)
-  //     // nameProduct.innerHTML = 'nuevo'
-  //     // countProducts.innerHTML = 5
-  //     // total.innerHTML = 5.50
+  barCodeInput.addEventListener('keyup', function (e) {
+    if (e.keyCode === 13) {
+      e.preventDefault()
+      const row = document.createElement('tr')
+      row.innerHTML = agregarFila()
+      // console.log(document.getElementById('row-table').value)
+      // console.log(e)
+      // nameProduct.innerHTML = 'nuevo'
+      // countProducts.innerHTML = 5
+      // total.innerHTML = 5.50
 
-  //     // $('table').find('tbody').prepend(agregarFila(e))
+      // $('table').find('tbody').prepend(agregarFila(e))
 
-  //     bodyTable.insertBefore(row, barcodeROw)
-  //   }
-  // })
+      bodyTable.insertBefore(row, barcodeROw)
+    }
+  })
+
+  // Empezando desde 0
+  let codigo = ''
+  let b = 0
+  const sendCode = (e) => {
+    // console.log(`se dio click ${e.code}`)
+    // console.log(e.key)
+    codigo = `${codigo}${e.key}`
+    b = b + 4
+    console.log(b)
+    console.log(codigo)
+    if (e.key === 'Enter') {
+      console.log('Enter+')
+      console.log(`Codigo final ${codigo}`)
+      setTimeout(() => {
+        console.log('CLean')
+        document.querySelector('#input-scan').value = ''
+      }, 3000)
+    }
+  }
+
+  const barCodeInputScan = document.querySelector('#input-scan')
+  console.log(barCodeInputScan)
+  barCodeInputScan.addEventListener('keyup', sendCode)
 })
 
 // Funciones
 
-const readBarCode = () => {
+const sendDataToController = () => {
   console.log('funcion bar code')
 }
 
@@ -58,19 +82,19 @@ function agregarFila () {
 
 // Jquery
 
-$('.table tbody tr input').keyup(function (e) {
-  const url = '/add_items'
-  if (e.keyCode === 13) {
-    $.ajax({
-      url: url,
-      data: { product: { name: 'Diego', description: 'whatever' } },
-      success: function (e) {
-        console.log('Success')
-        console.log(e)
-      },
-      error: function () {
-        console.log('error')
-      }
-    })
-  }
-})
+// $('.table tbody tr input').keyup(function (e) {
+//   const url = '/add_items'
+//   if (e.keyCode === 13) {
+//     $.ajax({
+//       url: url,
+//       data: { product: { name: 'Diego', description: 'whatever' } },
+//       success: function (e) {
+//         console.log('Success')
+//         console.log(e)
+//       },
+//       error: function () {
+//         console.log('error')
+//       }
+//     })
+//   }
+// })
