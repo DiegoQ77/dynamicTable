@@ -4,7 +4,7 @@ const bodyTable = document.querySelector('.table tbody')
 // console.log(barCodeInput)
 
 document.addEventListener('DOMContentLoaded', () => {
-  const barCodeInput = document.querySelector('.table tbody tr input')
+  const barCodeInput = document.querySelector('.table tbody tr input') //Input principal 
   const nameProduct = document.querySelector('#name')
   const countProducts = document.querySelector('#amount')
   const total = document.querySelector('#total')
@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const barcodeROw = document.querySelector('.table tbody tr')
 
   // variables
+  let codeI = ''
 
   // console.log(nameProduct)
   // console.log(barCodeInput)
@@ -19,20 +20,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // console.log(total)
 
   barCodeInput.addEventListener('keyup', function (e) {
-    if (e.keyCode === 13) {
-      e.preventDefault()
-      const row = document.createElement('tr')
-      row.innerHTML = agregarFila()
-      // console.log(document.getElementById('row-table').value)
-      // console.log(e)
-      // nameProduct.innerHTML = 'nuevo'
-      // countProducts.innerHTML = 5
-      // total.innerHTML = 5.50
-
-      // $('table').find('tbody').prepend(agregarFila(e))
-
-      bodyTable.insertBefore(row, barcodeROw)
+    console.log('Valor de e . key')
+    console.log(e.key)
+    console.log(typeof(e.key))
+    if (e.key !== 'Enter'){
+      codeI = `${codeI}${e.key}`
     }
+    if(e.key === 'Enter' && codeI === ''){
+      console.log('vacio NO SE CREA NADA')
+      console.log(e.key)
+    }else{
+      if (e.keyCode === 13) {
+        console.log('code de barCOdeIn')
+        console.log(e)
+        let code = 1
+        // Captar la data y enviar a mi funcion agregarFila
+        e.preventDefault()
+        const row = document.createElement('tr')
+        row.innerHTML = agregarFila(codeI)
+        bodyTable.insertBefore(row, barcodeROw)
+        barCodeInput.value = ''
+        codeI = ''
+      }
+    }
+
+
+
   })
 
   // Empezando desde 0
@@ -46,12 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(b)
     console.log(codigo)
     if (e.key === 'Enter') {
-      console.log('Enter+')
-      console.log(`Codigo final ${codigo}`)
-      setTimeout(() => {
-        console.log('CLean')
-        document.querySelector('#input-scan').value = ''
-      }, 3000)
+      // console.log('Enter+')
+      // console.log(`Codigo final ${codigo}`)
+
     }
   }
 
@@ -66,12 +76,16 @@ const sendDataToController = () => {
   console.log('funcion bar code')
 }
 
-function agregarFila () {
+function agregarFila (code) {
+  let codigo = code
   console.log('element from agregar Fial')
+  console.log(code)
+  // Buscar en la Base de datos y completar la fila
+  // Realizar el AJAX
   // console.log(e)
   return (`
     <tr>
-      <td>123123123</td>
+      <td>${codigo}</td>
       <td>Coca Cola</td>
       <td>cantidad</td>
       <td>6.50</td>
@@ -98,3 +112,4 @@ function agregarFila () {
 //     })
 //   }
 // })
+
